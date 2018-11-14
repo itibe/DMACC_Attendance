@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 /**
@@ -12,8 +14,9 @@ public class tester {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		//ErrorGUI test = new ErrorGUI();
@@ -27,14 +30,22 @@ public class tester {
 		//test4.generateWindow();
 		//TakeAttendanceGUI test5 = new TakeAttendanceGUI();
 		//test5.generateWindow();
-		AboutGUI test6 = new AboutGUI();
-		test6.generateWindow();
+		//AboutGUI test6 = new AboutGUI();
+		//test6.generateWindow();
 		//PreAttendanceGUI test7 = new PreAttendanceGUI();
 		//test7.generateWindow();
 		//MainWindow test8 = new MainWindow();
 		//test8.generateWindow();
 		//ChangePasswordGUI test9 = new ChangePasswordGUI();
 		//test9.generatewindow();
+		//ImportGUI test10 = new ImportGUI();
+		//test10.generatewindow();
+		
+		AddClass test = new AddClass();
+		System.out.println("Test result" + test.classid("Java"));
+		
+		
+		
 	}
 
 }

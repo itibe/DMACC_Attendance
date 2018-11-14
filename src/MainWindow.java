@@ -45,6 +45,7 @@ public class MainWindow extends JFrame{
 		private JMenuItem takeAttendanceMenuItem;	//take attendance menu item
 		private JMenuItem changeAdminPasswordMenuItem;	//change admin password item
 		private JMenuItem aboutMenuItem;	//about menu item
+		private JMenuItem importMenuItem;	//import menu item
 		private JButton takeAttendanceButton;	//take atteendance button
 		private JButton addClassButton;	//add class button
 		private JButton addStudentButton;	//add student button
@@ -64,14 +65,16 @@ public class MainWindow extends JFrame{
 		private String addStudentButtonText = "Add Student";	//text for add student button
 		private String imageName = "urban.jpg";	//	image class for center image
 		private String header = "DMACC Attendance";	//main window frame title
+		private String importMenuitemText = "Import class list";	//import menu item text
 		private final int WIDTH = 900;	//main frame width
-		private final int HEIGHT = 660;	//main fram height
+		private final int HEIGHT = 660;	//main frame height
 		private exitMenuItemAction exitMenuItemActionActionListener;	//action listener exit
 		private addStudentMenuItemAction addStudentMenuItemAction;	//action listener add student
 		private addClassMenuItemAction addClassMenuItemAction;	//action listener add class
 		private takeAttendanceMenuItemAction takeAttendanceMenuItemAction;	//action listener for take attenedance
 		private changeAdminPasswordMenuItemAction changeAdminPasswordMenuItemAction;	//action listener for change pasword
 		private aboutMenuItemAction aboutMenuItemAction;	//action listener for about menu 
+		private importMenuItemAction importMenuItemAction;	//action listener for import menu item
 		private ImageIcon img; //icon image
 		private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png";
 		
@@ -81,7 +84,8 @@ public class MainWindow extends JFrame{
 		 */
 		public MainWindow()
 		{
-			
+			importMenuItemAction = new importMenuItemAction();
+			importMenuItem = new JMenuItem();
 			imageBoard =  new JLabel("", mainImage, JLabel.CENTER);
 			centerWindow = new JPanel(new BorderLayout());
 			topWindow = new JPanel();
@@ -128,6 +132,7 @@ public class MainWindow extends JFrame{
 			takeAttendanceMenuItem.setText(takeAttendanceMenuItemText);
 			changeAdminPasswordMenuItem.setText(changeAdminPasswordMenuItemText);
 			aboutMenuItem.setText(aboutMenuItemText);
+			importMenuItem.setText(importMenuitemText);
 			
 			//set action listeners for menu items
 			exitMenuItem.addActionListener(exitMenuItemActionActionListener);
@@ -136,6 +141,7 @@ public class MainWindow extends JFrame{
 			takeAttendanceMenuItem.addActionListener(takeAttendanceMenuItemAction);
 			changeAdminPasswordMenuItem.addActionListener(changeAdminPasswordMenuItemAction);
 			aboutMenuItem.addActionListener(aboutMenuItemAction);
+			importMenuItem.addActionListener(importMenuItemAction);
 			
 			//build menu
 			menu.add(fileMenu);
@@ -146,6 +152,7 @@ public class MainWindow extends JFrame{
 			functionsMenu.add(addClassMenuItem);
 			functionsMenu.add(addStudentMenuItem);
 			functionsMenu.add(takeAttendanceMenuItem);
+			functionsMenu.add(importMenuItem);
 			adminMenu.add(changeAdminPasswordMenuItem);
 			aboutMenu.add(aboutMenuItem);
 			
@@ -290,6 +297,16 @@ public class MainWindow extends JFrame{
 				System.out.println("About menu items selected");
 				AboutGUI display = new AboutGUI();
 				display.generateWindow();
+				
+			}
+			
+		}
+		
+		class importMenuItemAction implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Import selected");
 				
 			}
 			
