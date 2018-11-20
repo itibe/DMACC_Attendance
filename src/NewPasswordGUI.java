@@ -1,5 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -85,8 +92,35 @@ public class NewPasswordGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Button pressed");
-
+				try {
+					//add password
+					Password pw = new Password();
+					pw.addpassword(input.getText());
+					//close screen
+					dispose();
+				} catch (IOException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(1);
+				} catch (InvalidKeyException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(7);
+				} catch (NoSuchAlgorithmException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(7);
+				} catch (NoSuchPaddingException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(7);
+				} catch (IllegalBlockSizeException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(7);
+				} catch (BadPaddingException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(7);
+				} catch (PasswordExistsException e) {
+					ErrorGUI error = new ErrorGUI();
+					error.generateMessage(13);
+				}
+			
 		}
 
 	}

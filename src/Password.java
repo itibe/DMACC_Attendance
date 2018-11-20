@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Scanner;
 
 import javax.crypto.BadPaddingException;
@@ -12,6 +13,8 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
+
+
 
 /**
  * class contains password operations
@@ -24,10 +27,10 @@ public class Password {
 	// Ian Tibe
 	// data fields
 	String passwordFile = "config.dat"; // name of password file
-	String key = "jplq954kbjf02kgy"; // 16-bit encryption key - a change to this will render current password
+	String key = "String12String12"; // 16-bit encryption key - a change to this will render current password
 										// unusable
-	int passwordMinLength = 8; // min pass word length
-	Key secretkey = new SecretKeySpec(key.getBytes(), "AES"); // key for encryption
+	private int passwordMinLength = 8; // min pass word length
+	private Key secretkey = new SecretKeySpec(key.getBytes(), "AES"); // key for encryption
 
 	// constructor
 	/**
@@ -46,6 +49,14 @@ public class Password {
 			input.createNewFile();
 
 		}
+	}
+
+	//getter
+	/**
+	 * @return the passwordMinLength
+	 */
+	public int getPasswordMinLength() {
+		return passwordMinLength;
 	}
 
 	// helper method
@@ -73,7 +84,7 @@ public class Password {
 		encryptedpassword = in.nextLine();
 
 		// decrypt password
-		password = this.decrypt(encryptedpassword);
+		password = encryptedpassword;
 
 		// check if password is blank
 		if (password.equals("")) {
@@ -104,9 +115,10 @@ public class Password {
 	 * @throws NoSuchPaddingException
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
+	 * @throws PasswordExistsException 
 	 */
 	public void addpassword(String pw) throws IOException, InvalidKeyException, NoSuchAlgorithmException,
-			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, PasswordExistsException {
 
 		File input = new File(passwordFile);
 		FileWriter output = new FileWriter(passwordFile, true);
@@ -116,7 +128,7 @@ public class Password {
 		if (input.length() == 0) {
 
 			// append to file
-			output.append(this.encrypt(pw));
+			output.append(pw);
 
 			// flush and close file
 			output.flush();
@@ -125,7 +137,7 @@ public class Password {
 			// if file is non-zero length, there is allready a password and we can not add a
 			// new one, change instead
 			output.close();
-			throw new IllegalArgumentException("pass word allready exists");
+			throw new PasswordExistsException("pass word allready exists");
 		}
 
 	}
@@ -141,9 +153,10 @@ public class Password {
 	 * @throws NoSuchPaddingException
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
+	 * @throws PasswordToShortException 
 	 */
 	public void changepassword(String pw) throws IOException, InvalidKeyException, NoSuchAlgorithmException,
-			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException {
+			NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, PasswordToShortException {
 
 		// check length of password
 		if (this.checklength(pw)) {
@@ -158,7 +171,7 @@ public class Password {
 			// create new password file with new password
 			inputagain.createNewFile();
 			FileWriter output = new FileWriter(passwordFile, true);
-			String encryptedpassword = this.encrypt(pw);
+			String encryptedpassword = pw;
 
 			// add new password to file
 			output.append(encryptedpassword);
@@ -166,7 +179,7 @@ public class Password {
 			output.close();
 		} else {
 			// if password does not meet criteria, throw exception
-			throw new IllegalArgumentException("password is too short");
+			throw new PasswordToShortException("password is too short");
 		}
 
 	}
@@ -200,13 +213,13 @@ public class Password {
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 */
-	private String encrypt(String pw) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+	public byte[] encrypt(String pw) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
 			IllegalBlockSizeException, BadPaddingException {
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.ENCRYPT_MODE, secretkey);
 		byte[] encrypted = cipher.doFinal(pw.getBytes());
-		String result = new String(encrypted);
-		return result;
+		//String result = Base64.getEncoder().encodeToString(encrypted);
+		return encrypted;
 	}
 
 	/**
@@ -221,21 +234,18 @@ public class Password {
 	 * @throws IllegalBlockSizeException
 	 * @throws BadPaddingException
 	 */
-	private String decrypt(String pw) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+	public String decrypt(byte[] pw) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
 			IllegalBlockSizeException, BadPaddingException {
 		Cipher cipher = Cipher.getInstance("AES");
 		cipher.init(Cipher.DECRYPT_MODE, secretkey);
-		byte[] encrypted = cipher.doFinal(pw.getBytes());
+		byte[] encrypted = cipher.doFinal(pw);
 		String result = new String(encrypted);
 		return result;
 	}
 
-	/**
-	 * return true if password exists, false otherwise
-	 * 
-	 * @return true if password exists, false otherwise
-	 */
-	public boolean passwordexit() {
+	
+	 	 
+	public boolean passwordexist() {
 		File input = new File(passwordFile);
 		if (input.length() == 0) {
 

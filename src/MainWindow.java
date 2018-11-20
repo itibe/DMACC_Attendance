@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -76,7 +77,7 @@ public class MainWindow extends JFrame{
 		private aboutMenuItemAction aboutMenuItemAction;	//action listener for about menu 
 		private importMenuItemAction importMenuItemAction;	//action listener for import menu item
 		private ImageIcon img; //icon image
-		private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png";
+		private String iconName = "dmacc_icon.png";
 		
 		//constructor
 		/**
@@ -106,7 +107,7 @@ public class MainWindow extends JFrame{
 			takeAttendanceButton = new JButton();
 			addClassButton = new JButton();
 			addStudentButton = new JButton();
-			mainImage = new ImageIcon("C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\urban3.jpg");
+			mainImage = new ImageIcon("urban.jpg");
 			exitMenuItemActionActionListener = new exitMenuItemAction();
 			addStudentMenuItemAction = new addStudentMenuItemAction();
 			addClassMenuItemAction = new addClassMenuItemAction();
@@ -114,8 +115,32 @@ public class MainWindow extends JFrame{
 			changeAdminPasswordMenuItemAction = new changeAdminPasswordMenuItemAction();
 			aboutMenuItemAction = new aboutMenuItemAction();
 			img = new ImageIcon(iconName);
+			
+			//prompt for new password if password does not exist
+			
+			try {
+				Password pw = new Password();
+				if(pw.passwordexist() == false)
+				{
+					
+					NewPasswordGUI instance = new NewPasswordGUI();
+					instance.setAlwaysOnTop(true);
+					instance.generatewindow();
+					
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(8);
+			}
+			
 		}
 		
+		
+		
+		
+		
+		//helper
 		/**
 		 * generates main window
 		 */
@@ -184,11 +209,10 @@ public class MainWindow extends JFrame{
 			topWindow.setBackground(Color.BLUE);
 						
 			centerWindow.add(imageBoard);
-		
+						
 			bottomWindow.add(statusBoard);
 			bottomWindow.setBackground(Color.white);
-			
-			
+						
 			//add sub panels to main panel
 			panel.setLayout(new BorderLayout());
 			panel.add(centerWindow,BorderLayout.CENTER);
@@ -234,8 +258,8 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("add studetn selected");
-				
+				AddStudentGUI instance = new AddStudentGUI();
+				instance.generateWindow();
 			}
 			
 		}
@@ -249,7 +273,8 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("add class selected");
+				AddClassGUI instance = new AddClassGUI();
+				instance.generateWindow();
 				
 			}
 			
@@ -263,7 +288,8 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("take attendance selected");
+				PreAttendanceGUI instance = new PreAttendanceGUI();
+				instance.generateWindow();
 				
 			}
 			
@@ -278,8 +304,8 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("change admin password");
-				
+				ChangePasswordGUI instance = new ChangePasswordGUI();
+				instance.generatewindow();
 			}
 			
 		}
@@ -294,7 +320,6 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("About menu items selected");
 				AboutGUI display = new AboutGUI();
 				display.generateWindow();
 				

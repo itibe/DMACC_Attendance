@@ -19,9 +19,10 @@ public class AboutGUI extends JFrame{
 	
 	//Ian Tibe
 	//data fields
+	private final double versionNumber = 1.00;	//software version number
 	private String exitButtonText = "Exit";	//test for exit button
 	private String author = "Ian Tibe";	//author name text
-	private String version = "Version: 1.00";	//version text
+	private String version = "Version: " + versionNumber;	//version text
 	private String date = "Release Date: December 2018";	//release date text
 	private String title = "DMACC Attendance";	//Title of program text
 	private String header = "About Software";	//window header text
@@ -44,7 +45,7 @@ public class AboutGUI extends JFrame{
 	private final int authorFontSize = 20;	//author font size
 	private exitButton exitButtonListener;	//action listener for exit button
 	private ImageIcon img; //icon image
-	private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png";
+	private String iconName = "dmacc_icon.png";
 	
 	
 	/**
@@ -125,7 +126,7 @@ public class AboutGUI extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			System.out.println("Exit button pressed");
+			dispose();
 			
 		}
 		

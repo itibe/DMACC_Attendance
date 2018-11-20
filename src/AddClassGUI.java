@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -21,8 +22,8 @@ public class AddClassGUI extends JFrame{
 		//Ian Tibe
 		//data fields
 		private String exitLabel = "Exit";	//Exit button text
-		private String executeMessage = "Add Student";	//execute button text
-		private String header = "Add student";	//window header text
+		private String executeMessage = "Add Class";	//execute button text
+		private String header = "Add Class";	//window header text
 		private String labelContents = "Class Name";	//Class input field label text
 		private int textInputSize = 15;	//Class Input text field size
 		private JPanel panel;	//main panel
@@ -37,7 +38,7 @@ public class AddClassGUI extends JFrame{
 		private addClassButton addClassListener;	//action listener for add class button
 		private exitButton exitButtonListener;		//action listener for exit button
 		private ImageIcon img; //icon image
-		private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png";
+		private String iconName = "dmacc_icon.png";
 		
 		//constructor
 		/**
@@ -108,11 +109,19 @@ public class AddClassGUI extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				//test
-				System.out.println("Add class button was pressed");
-				
-						
-				
+								
+					try {
+						AddClass instance = new AddClass();
+						instance.addclass(input.getText());
+						input.setText("");
+					} catch (IOException e) {
+						ErrorGUI error = new ErrorGUI();
+						error.generateMessage(1);
+					} catch (DuplicateClassException e) {
+						ErrorGUI error = new ErrorGUI();
+						error.generateMessage(2);
+					}
+								
 			}
 			
 		}
@@ -127,7 +136,7 @@ public class AddClassGUI extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println("Close button pressed");
+				dispose();
 				
 			}
 			
