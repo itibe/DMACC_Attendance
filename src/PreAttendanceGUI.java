@@ -126,8 +126,9 @@ public class PreAttendanceGUI extends JFrame {
 			AddClass instance = new AddClass();
 			classData = new JComboBox<String>(instance.getclasslist());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			ErrorGUI error = new ErrorGUI();
+			error.generateMessage(1);
 		}
 
 		timeData.setText(formatter.format(time));

@@ -19,7 +19,7 @@ public class Error {
 
 	// error messages
 	private Password pw;
-	private String one = "General File I/O error. Possible Missing files....";
+	private String one = "General File I/O error. Users who manually edit data storage file will receive this error";
 	private String two = "Class Allready exists";
 	private String three = "Unable to generate class list";
 	private String four = "Class does not exist";
@@ -37,7 +37,8 @@ public class Error {
 	private String sixteen = "User must agree to terms and check box";
 	private String seveenteen = "Student not defined in selected class";
 	private String eighteen = "Student has all ready entered attendance for above class";
-	
+	private String ninteen = "No student are in selected class";
+	private String twenty = "No attendance data found for class";
 
 	// constructor
 	/**
@@ -63,6 +64,8 @@ public class Error {
 		 map.put(16, sixteen);
 		 map.put(17, seveenteen);
 		 map.put(18, eighteen);
+		 map.put(19, ninteen);
+		 map.put(20, twenty);
 				
 	}
 

@@ -62,7 +62,7 @@ public class TakeAttendance {
 			String filename = attendanceFile + "." + classid; 
 			File file = new File(filename);
 			
-			//check if file exists
+			//check if file exists, if not create
 			if (file.exists() == false) {
 				file.createNewFile();
 			}
@@ -76,18 +76,20 @@ public class TakeAttendance {
 				Scanner parse = new Scanner(line);
 				parse.useDelimiter(",");
 				String item = parse.next();
-				//edited items start
+				item.trim();
 				String fileDate = parse.next();
-				//if id number in file equals input id number and line in file equals
+				fileDate.trim();
+				//if id number in file equals input id number and date in file in file equals
 				//todays date, student has taken attendance allready
 				if(item.equals(id))
 				{
-					//if(fileDate.equals(date))
-					//{
+					//important keep date.toString intact. This will convert date from LocalDate to String so if statement will work
+					if(fileDate.equals(date.toString()))
+					{
 					parse.close();
 					in.close();
 					throw new DuplicateAttendanceEntryException("Student has taken attendance");
-					//}
+					}
 				}
 				
 				parse.close();

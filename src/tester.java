@@ -1,11 +1,13 @@
 import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.LinkedList;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.swing.JFrame;
+import javax.swing.JTable;
 
 /**
  * 
@@ -26,12 +28,19 @@ public class tester {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		
 		
+		 String column[] = { "ID", "NAME", "SALARY" };
+		 String info[][] = { { "test", "test", "test" }, { "test", "test", "test" } };	
+				
+		
+		
+		
+		
 		//AddClassGUI test2 = new AddClassGUI();
 		//test2.generateWindow();
 		//AddStudentGUI test3 = new AddStudentGUI();
 		//test3.generateWindow();
 		//ReportGUI test4 = new ReportGUI();
-		//test4.generateWindow();
+		//test4.generateWindow(column,info);
 		//TakeAttendanceGUI test5 = new TakeAttendanceGUI();
 		//test5.generateWindow();
 		//AboutGUI test6 = new AboutGUI();
@@ -40,6 +49,7 @@ public class tester {
 		//test7.generateWindow();
 		MainWindow test8 = new MainWindow();
 		test8.generateWindow();
+		//test8.setdisplay(true);
 		//ChangePasswordGUI test9 = new ChangePasswordGUI();
 		//test9.generatewindow();
 		//ImportGUI test10 = new ImportGUI();
@@ -58,7 +68,31 @@ public class tester {
 		//test16.takeattendance("556265486", "second class");
 		//Error error = new Error();
 		//System.out.println(error.generatemessage(1));
+		//ChooseReportGUI test17 = new ChooseReportGUI();
+		//test17.generatewindow();
 		
+//			Report report = new Report();
+//			
+//			try {
+//				String[][] data = report.classattendance("Video Game");
+//				ReportGUI display = new ReportGUI();
+//				display.generateWindow(header, data);
+//				
+//			} catch (ClassDoesNotExistException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (NoStudentInClassException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			} catch (NoAttendanceDataFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+									
+			
+			
+			
+				
 				
 	}
 

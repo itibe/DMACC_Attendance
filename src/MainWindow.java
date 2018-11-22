@@ -47,6 +47,7 @@ public class MainWindow extends JFrame{
 		private JMenuItem changeAdminPasswordMenuItem;	//change admin password item
 		private JMenuItem aboutMenuItem;	//about menu item
 		private JMenuItem importMenuItem;	//import menu item
+		private JMenuItem reportMenuItem;	//report menu item
 		private JButton takeAttendanceButton;	//take atteendance button
 		private JButton addClassButton;	//add class button
 		private JButton addStudentButton;	//add student button
@@ -55,7 +56,8 @@ public class MainWindow extends JFrame{
 		private String functionsMenuText = "Functions";	//text for function menu
 		private String adminMenuText = "Admin";	//text for admin menu
 		private String aboutMenuText = "About";	//text for about menu
-		private String exitMenuItemText = "Exit";	//test for exit menu item
+		private String exitMenuItemText = "Exit";	//text for exit menu item
+		private String reportMenuItemText = "Reports";	//text for report menu item
 		private String addStudentMenuItemText = "Add Student";	//text for add student menu item
 		private String addClassMenuItemText = "Add Class";	//text for add class menu item
 		private String takeAttendanceMenuItemText = "Take Attendance";	//test for take attendance menu item
@@ -69,6 +71,7 @@ public class MainWindow extends JFrame{
 		private String importMenuitemText = "Import class list";	//import menu item text
 		private final int WIDTH = 900;	//main frame width
 		private final int HEIGHT = 660;	//main frame height
+		private reportMenuItemAction reportMenuItemActionListener;
 		private exitMenuItemAction exitMenuItemActionActionListener;	//action listener exit
 		private addStudentMenuItemAction addStudentMenuItemAction;	//action listener add student
 		private addClassMenuItemAction addClassMenuItemAction;	//action listener add class
@@ -79,12 +82,14 @@ public class MainWindow extends JFrame{
 		private ImageIcon img; //icon image
 		private String iconName = "dmacc_icon.png";
 		
+		
 		//constructor
 		/**
 		 * default constructor
 		 */
 		public MainWindow()
 		{
+			reportMenuItem = new JMenuItem();
 			importMenuItemAction = new importMenuItemAction();
 			importMenuItem = new JMenuItem();
 			imageBoard =  new JLabel("", mainImage, JLabel.CENTER);
@@ -108,6 +113,7 @@ public class MainWindow extends JFrame{
 			addClassButton = new JButton();
 			addStudentButton = new JButton();
 			mainImage = new ImageIcon("urban.jpg");
+			reportMenuItemActionListener = new reportMenuItemAction();
 			exitMenuItemActionActionListener = new exitMenuItemAction();
 			addStudentMenuItemAction = new addStudentMenuItemAction();
 			addClassMenuItemAction = new addClassMenuItemAction();
@@ -141,6 +147,19 @@ public class MainWindow extends JFrame{
 		
 		
 		//helper
+		
+		public void setdisplay(boolean display)
+		{
+			if(display = true)
+			{
+				setVisible(true);
+			}
+			else
+			{
+				setVisible(false);
+			}
+		}
+		
 		/**
 		 * generates main window
 		 */
@@ -158,6 +177,7 @@ public class MainWindow extends JFrame{
 			changeAdminPasswordMenuItem.setText(changeAdminPasswordMenuItemText);
 			aboutMenuItem.setText(aboutMenuItemText);
 			importMenuItem.setText(importMenuitemText);
+			reportMenuItem.setText(reportMenuItemText);
 			
 			//set action listeners for menu items
 			exitMenuItem.addActionListener(exitMenuItemActionActionListener);
@@ -167,17 +187,20 @@ public class MainWindow extends JFrame{
 			changeAdminPasswordMenuItem.addActionListener(changeAdminPasswordMenuItemAction);
 			aboutMenuItem.addActionListener(aboutMenuItemAction);
 			importMenuItem.addActionListener(importMenuItemAction);
+			reportMenuItem.addActionListener(reportMenuItemActionListener);
 			
 			//build menu
 			menu.add(fileMenu);
 			menu.add(functionsMenu);
 			menu.add(adminMenu);
 			menu.add(aboutMenu);
+			
 			fileMenu.add(exitMenuItem);
 			functionsMenu.add(addClassMenuItem);
 			functionsMenu.add(addStudentMenuItem);
 			functionsMenu.add(takeAttendanceMenuItem);
 			functionsMenu.add(importMenuItem);
+			functionsMenu.add(reportMenuItem);
 			adminMenu.add(changeAdminPasswordMenuItem);
 			aboutMenu.add(aboutMenuItem);
 			
@@ -333,6 +356,19 @@ public class MainWindow extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Import selected");
 				
+			}
+			
+		}
+		
+		class reportMenuItemAction implements ActionListener
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+					ChooseReportGUI instance = new ChooseReportGUI();
+					instance.generatewindow();
+								
 			}
 			
 		}

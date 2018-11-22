@@ -168,6 +168,11 @@ public class AddClass {
 		return results;
 	}
 	
+	/**
+	 * returns a string of available class rooms
+	 * @return
+	 * @throws FileNotFoundException
+	 */
 	public String[] getclasslist() throws FileNotFoundException
 	{
 		File file = new File(classFile);
