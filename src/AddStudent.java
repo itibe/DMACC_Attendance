@@ -64,7 +64,7 @@ public class AddStudent {
 		// add student to existing class file
 
 		if (this.validateid(id) == false) {
-			throw new InvalidDmaccNumberException("ID not found");
+			throw new InvalidDmaccNumberException("ID not Valid");
 		}
 
 		// check for duplicate id number in student file
@@ -98,7 +98,7 @@ public class AddStudent {
 	 * @param id
 	 * @return
 	 */
-	private boolean validateid(String id) {
+	protected boolean validateid(String id) {
 		boolean result = true;
 		char letter;
 		// check length of id

@@ -83,7 +83,7 @@ public class ReportGUI extends JFrame {
 		this.setSize(WIDTH, HEIGHT);
 		this.add(panel);
 		this.setTitle(header);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setIconImage(img.getImage());
 		this.setVisible(true);
 		

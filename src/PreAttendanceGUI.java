@@ -8,6 +8,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Locale;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -116,10 +118,10 @@ public class PreAttendanceGUI extends JFrame {
 		dateData.setBorder(BorderFactory.createLineBorder(Color.black));
 		timeData.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		// test data
+		
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
+		
 		dateData.setText(date.toString());
 
 		try {
@@ -131,7 +133,10 @@ public class PreAttendanceGUI extends JFrame {
 			error.generateMessage(1);
 		}
 
-		timeData.setText(formatter.format(time));
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
+	            .withLocale(Locale.US);
+	    		
+		timeData.setText(time.format(timeFormatter));
 		// end test data
 
 		// set up sub panels
@@ -157,7 +162,7 @@ public class PreAttendanceGUI extends JFrame {
 		this.setSize(WIDTH, HEIGHT);
 		this.add(panel);
 		this.setTitle(header);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setIconImage(img.getImage());
 		this.setVisible(true);
 

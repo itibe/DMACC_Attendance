@@ -125,8 +125,8 @@ public class TakeAttendanceGUI extends JFrame {
 		idNumberLabel.setText(idNumberLabelData);
 		attendanceMessage.setText(attendancePromise);
 		//display class received from previous window		
-		classTextArea.setText(transferClass);
 		
+		classTextArea.setText(transferClass);
 		classTextArea.setFont(new Font("", Font.PLAIN, classTextAreaFontSize));
 		classTextArea.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -190,7 +190,7 @@ public class TakeAttendanceGUI extends JFrame {
 				// change statusboard if sucessful
 				AddStudent instance = new AddStudent();
 				String student = instance.getstudentname(idNumberInput.getText(), getTransferClass());
-				statusData.setText("Success!  " + student + "'s attendance has been recorded");
+				statusData.setText(" Success!  " + student + "'s attendance has been recorded");
 				statusData.setForeground(Color.GREEN);
 				checkBox.setSelected(false);
 			} catch (IOException e) {
@@ -245,18 +245,12 @@ public class TakeAttendanceGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			SimplePasswordGUI instance = new SimplePasswordGUI();
-			instance.setAlwaysOnTop(true);
-			instance.generatewindow();
-			System.out.println(instance.isCorrectPw());
-			if (instance.isCorrectPw() == true) {
-
 				dispose();
-				System.out.println("We get into block");
+				
 			}
 
 		}
 
 	}
 
-}
+

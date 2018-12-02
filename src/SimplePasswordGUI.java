@@ -108,7 +108,7 @@ public class SimplePasswordGUI extends JFrame {
 		this.add(panel);
 		this.setTitle(header);
 		this.setSize(WIDTH, HEIGHT);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		this.setIconImage(img.getImage());
 	}

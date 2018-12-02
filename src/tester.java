@@ -28,9 +28,7 @@ public class tester {
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		
 		
-		 String column[] = { "ID", "NAME", "SALARY" };
-		 String info[][] = { { "test", "test", "test" }, { "test", "test", "test" } };	
-				
+		
 		
 		
 		

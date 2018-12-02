@@ -117,7 +117,7 @@ public class ChooseReportGUI extends JFrame {
 		this.setSize(WIDTH, HEIGHT);
 		this.add(panel);
 		this.setTitle(header);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setIconImage(img.getImage());
 		this.setVisible(true);
 		
@@ -210,17 +210,17 @@ public class ChooseReportGUI extends JFrame {
 				ReportGUI display = new ReportGUI();
 				display.generateWindow(classListColumnList, data);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(1);
 			} catch (ClassDoesNotExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(4);
 			} catch (NoStudentInClassException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(19);
 			} catch (NoAttendanceDataFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(20);
 			}
 			
 			

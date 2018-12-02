@@ -354,8 +354,9 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Import selected");
-				
+						ImportGUI instance = new ImportGUI();
+						instance.generatewindow();
+								
 			}
 			
 		}

@@ -136,7 +136,7 @@ public class AddStudentGUI extends JFrame {
 		this.add(panel);
 		this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		this.setTitle(header);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setIconImage(img.getImage());
 		this.setVisible(true);
 
@@ -204,7 +204,6 @@ public class AddStudentGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			dispose();
 
 		}
