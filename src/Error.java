@@ -18,7 +18,7 @@ public class Error {
 	Map<Integer,String> map;
 
 	// error messages
-	private Password pw;
+	
 	private String one = "General File I/O error. Users who manually edit data storage file will receive this error";
 	private String two = "Class Allready exists";
 	private String three = "Unable to generate class list";

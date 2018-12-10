@@ -18,9 +18,9 @@ public class Report {
 
 	// Ian Tibe
 	// data fields
-	String studentFile = "StudentList";
-	String attendanceFile = "Attendance"; // base file name for attendance information
-	String notAttendText = "Not Attended"; //text to display when student has not attended
+	private String studentFile = "StudentList"; // base file name for student information
+	private String attendanceFile = "Attendance"; // base file name for attendance information
+	private String notAttendText = "Not Attended"; // text to display when student has not attended
 
 	// constructor
 	/**
@@ -190,7 +190,7 @@ public class Report {
 		String attendanceFileName = attendanceFile + "." + classid;
 		File attendanceFile = new File(attendanceFileName);
 
-		//if not attendance file found, throw exception
+		// if not attendance file found, throw exception
 		if (attendanceFile.exists() == false) {
 			throw new NoAttendanceDataFoundException("No Attendance Data found");
 		}
@@ -221,7 +221,7 @@ public class Report {
 					String studentDateInAttendance = attendanceParse.next();
 					// convert string to LocalDate format
 					LocalDate studentDateInAttendanceLocalDate = LocalDate.parse(studentDateInAttendance);
-					//put date in findLargest linked list
+					// put date in findLargest linked list
 					findLargest.add(studentDateInAttendanceLocalDate);
 
 				}

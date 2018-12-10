@@ -20,7 +20,7 @@ public class AddStudent {
 	// data fields
 	String studentFile = "StudentList"; // student file name
 	int idLength = 9; // student id length
-	String dmaccIdStart = "9";
+	String dmaccIdStart = "9"; // number that DMACC id must start wtih
 
 	// constructor
 	/**
@@ -41,11 +41,12 @@ public class AddStudent {
 	 * @param id
 	 *            id number of student
 	 * @throws IOException
-	 * @throws ClassDoesNotExistException 
-	 * @throws StudentIdNotFoundException 
-	 * @throws DuplicateStudentIdException 
+	 * @throws ClassDoesNotExistException
+	 * @throws StudentIdNotFoundException
+	 * @throws DuplicateStudentIdException
 	 */
-	public void addstudent(String student, String clas, String id) throws IOException, ClassDoesNotExistException, InvalidDmaccNumberException, DuplicateStudentIdException {
+	public void addstudent(String student, String clas, String id)
+			throws IOException, ClassDoesNotExistException, InvalidDmaccNumberException, DuplicateStudentIdException {
 
 		// check if class exists
 		AddClass instance = new AddClass();
@@ -81,7 +82,7 @@ public class AddStudent {
 				parse.close();
 				throw new DuplicateStudentIdException("duplicate id");
 			}
-			parse.close();
+
 		}
 
 		// add info to file and close file to flush
@@ -115,9 +116,7 @@ public class AddStudent {
 			if (id.substring(0, 1).equals(dmaccIdStart) == false) {
 				result = false;
 			}
-		}
-		else
-		{
+		} else {
 			result = false;
 		}
 
@@ -133,11 +132,12 @@ public class AddStudent {
 	 *            class room in text form
 	 * @return String of student name
 	 * @throws IOException
-	 * @throws ClassDoesNotExistException 
-	 * @throws StudentNotInClassException 
-	 * @throws StudentIdNotFoundException 
+	 * @throws ClassDoesNotExistException
+	 * @throws StudentNotInClassException
+	 * @throws StudentIdNotFoundException
 	 */
-	public String getstudentname(String id, String cla) throws IOException, ClassDoesNotExistException, StudentNotInClassException, StudentIdNotFoundException {
+	public String getstudentname(String id, String cla)
+			throws IOException, ClassDoesNotExistException, StudentNotInClassException, StudentIdNotFoundException {
 
 		// check if class exists
 		AddClass instance = new AddClass();
@@ -171,9 +171,10 @@ public class AddStudent {
 		}
 
 		if (name == null) {
+			in.close();
 			throw new StudentIdNotFoundException("ID not found");
 		}
-
+		in.close();
 		return name;
 	}
 
@@ -186,7 +187,7 @@ public class AddStudent {
 	 *            class
 	 * @return true if student id is in given class, false otherwise
 	 * @throws IOException
-	 * @throws ClassDoesNotExistException 
+	 * @throws ClassDoesNotExistException
 	 */
 	public boolean validatestudentid(String id, String cla) throws IOException, ClassDoesNotExistException {
 		boolean result = false;

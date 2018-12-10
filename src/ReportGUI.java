@@ -32,7 +32,7 @@ public class ReportGUI extends JFrame {
 	private ImageIcon img; // icon image
 	private String iconName = "dmacc_icon.png";
 	private exitButton exitButtonListener; // action listener for exit button
-
+	private JPanel reportPanel;
 	// constructor
 	/**
 	 * default constructor
@@ -43,10 +43,10 @@ public class ReportGUI extends JFrame {
 		//report area initalized in generatewindow method
 		exit = new JButton();
 		panel = new JPanel();
-		scrollPane = new JScrollPane(reportArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane = new JScrollPane(reportArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		exitButtonListener = new exitButton();
 		img = new ImageIcon(iconName);
+		reportPanel = new JPanel();
 
 	}
 
@@ -66,6 +66,7 @@ public class ReportGUI extends JFrame {
 		reportArea.setBorder(BorderFactory.createLineBorder(Color.black));
 		reportArea.setAutoscrolls(true);
 		reportArea.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		
 		       
 		// setup action listener
 		exit.setText(exitButtonText);
@@ -73,13 +74,15 @@ public class ReportGUI extends JFrame {
 
 		// add items to sub panels
 		buttonPanel.add(exit);
-
+		reportPanel.add(reportArea);
+		//reportPanel.add(scrollPane);
+		//panel.add(scrollPane);
 		// add sub panels to main panel
-		panel.add(reportArea);
+		
+		panel.add(reportPanel);
 		panel.add(buttonPanel);
 
 		// setup main frame
-
 		this.setSize(WIDTH, HEIGHT);
 		this.add(panel);
 		this.setTitle(header);

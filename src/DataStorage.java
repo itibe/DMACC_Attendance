@@ -7,7 +7,7 @@ import java.util.LinkedList;
 
 /**
  * @author Ian Tibe
- *
+ *stores data from files to be displayed
  */
 public class DataStorage {
 	
@@ -17,6 +17,9 @@ public class DataStorage {
 	private String id;
 	private LinkedList<String> date;
 	
+	/**
+	 * default constructor
+	 */
 	public DataStorage()
 	{
 		date = new LinkedList<String>();

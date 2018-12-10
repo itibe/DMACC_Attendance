@@ -27,23 +27,23 @@ import javax.swing.JTextField;
 public class SimplePasswordGUI extends JFrame {
 	// Ian Tibe
 	// data fields
-	private boolean correctPw;
+	
 	private JPanel panel; // main panel
 	private JPanel inputPanel; // input sub panel
 	private JPanel buttonPanel; // button panel
-	private String executeButtonText = "Exit Attendance Mode"; // execute button label
+	private String executeButtonText = "Enter Report Mode"; // execute button label
 	private String cancelButtonText = "Cancel"; // cancel button label
 	private JButton executeButton; // execute button
 	private JButton cancelButton; // cancel button
-	private JTextField inputPassword; // password input field
+	private JPasswordField inputPassword; // password input field
 	private JLabel inputLabel; // input label
-	String inputLabelText = "Input admin password to exit attendance mode"; // text for input label
-	String header = "Exit Attendance Mode"; // header text
-	final int HEIGHT = 225; // frame height
-	final int WIDTH = 350; // frame width
-	final int INPUTFIELDWIDTH = 25; // input field width
-	ExecuteActionListener executeButtonAction; // action listener for execute button
-	CancelActionListener cancelButtonAction; // cancel button action listener
+	private String inputLabelText = "Input admin password to enter report mode"; // text for input label
+	private String header = "Eenter Report Mode"; // header text
+	private final int HEIGHT = 225; // frame height
+	private final int WIDTH = 350; // frame width
+	private final int INPUTFIELDWIDTH = 25; // input field width
+	private ExecuteActionListener executeButtonAction; // action listener for execute button
+	private CancelActionListener cancelButtonAction; // cancel button action listener
 	private ImageIcon img; // icon image //icon image for icon
 	private String iconName = "dmacc_icon.png"; // icon file name
 
@@ -56,31 +56,14 @@ public class SimplePasswordGUI extends JFrame {
 		buttonPanel = new JPanel();
 		executeButton = new JButton();
 		cancelButton = new JButton();
-		inputPassword = new JTextField(INPUTFIELDWIDTH);
+		inputPassword = new JPasswordField(INPUTFIELDWIDTH);
 		inputLabel = new JLabel();
 		executeButtonAction = new ExecuteActionListener();
 		cancelButtonAction = new CancelActionListener();
 		img = new ImageIcon(iconName);
-		correctPw = false;
+		
 	}
-
-	// getter
-
-	/**
-	 * @return the correctPw
-	 */
-	public boolean isCorrectPw() {
-		return correctPw;
-	}
-
-	/**
-	 * @param correctPw
-	 *            the correctPw to set
-	 */
-	public void setCorrectPw(boolean correctPw) {
-		this.correctPw = correctPw;
-	}
-
+	
 	/**
 	 * generates window
 	 */
@@ -126,14 +109,17 @@ public class SimplePasswordGUI extends JFrame {
 
 			try {
 				Password pw = new Password();
-				if (pw.validatepassword(inputPassword.getText())) {
-
+				char[] inputedPassword = inputPassword.getPassword();
+				
+				
+				if (pw.validatepassword(inputedPassword)) {
+					ChooseReportGUI instance = new ChooseReportGUI();
+					instance.generatewindow();
 					dispose();
-
-					setCorrectPw(true);
-					System.out.println("Value in simple pw" + isCorrectPw());
+					inputedPassword = null;
 				} else {
 					inputPassword.setText("");
+					inputedPassword = null;
 					throw new IncorrectPasswordException("Incorrect password");
 
 				}

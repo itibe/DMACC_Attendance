@@ -29,7 +29,7 @@ import javax.swing.border.Border;
 public class TakeAttendanceGUI extends JFrame {
 	// Ian Tibe
 	// data fields
-	private String initialStatusText = "Input student number";	//initial status label text
+	private String initialStatusText = "Input student number"; // initial status label text
 	private String transferClass = ""; // variable that receives class from previous window
 	private JPanel panel; // main panel
 	private JPanel messagePanel; // sub panel for attendance status items
@@ -53,7 +53,7 @@ public class TakeAttendanceGUI extends JFrame {
 	private String attendancePromise = "I attest that I am in class today. Falsifying attendance data is punishable under DMACC code";
 	private String executeButtonMessage = "Take Attendance"; // take attendance button text
 	private String exitButtonMessage = "Exit Attendance mode"; // exit button text
-	private String header = "Begin Attendance"; // frame header
+	private String header = "Take Attendance"; // frame header
 	private String classLabelData = "Class: "; // class label text
 	private String idNumberLabelData = "Enter 9 Digit student id number:"; // id number input text
 	private final int idNumberInputWidth = 25; // id number input box width
@@ -91,7 +91,7 @@ public class TakeAttendanceGUI extends JFrame {
 	}
 
 	// getter and setter for variable that receives class info from previous window
-	//it is set from preAttendance class instance
+	// it is set from preAttendance class instance
 	/**
 	 * @return the transferClass
 	 */
@@ -124,15 +124,15 @@ public class TakeAttendanceGUI extends JFrame {
 		classLabel.setFont(new Font("", Font.PLAIN, classFontSize));
 		idNumberLabel.setText(idNumberLabelData);
 		attendanceMessage.setText(attendancePromise);
-		//display class received from previous window		
-		
+		// display class received from previous window
+
 		classTextArea.setText(transferClass);
 		classTextArea.setFont(new Font("", Font.PLAIN, classTextAreaFontSize));
 		classTextArea.setBorder(BorderFactory.createLineBorder(Color.black));
 
-		//set initial status text
+		// set initial status text
 		statusData.setText(initialStatusText);
-				
+
 		// set up action listeners
 		executeButton.addActionListener(takeAttendanceButtonListener);
 		exitButton.addActionListener(exitAttendanceButtonListener);
@@ -185,7 +185,7 @@ public class TakeAttendanceGUI extends JFrame {
 
 				// add to file
 				TakeAttendance attend = new TakeAttendance();
-				//take attendance
+				// take attendance
 				attend.takeattendance(idNumberInput.getText(), getTransferClass());
 				// change statusboard if sucessful
 				AddStudent instance = new AddStudent();
@@ -193,36 +193,47 @@ public class TakeAttendanceGUI extends JFrame {
 				statusData.setText(" Success!  " + student + "'s attendance has been recorded");
 				statusData.setForeground(Color.GREEN);
 				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (IOException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
 				statusData.setText(er.generatemessage(1));
 				statusData.setForeground(Color.RED);
 				error.generateMessage(1);
+				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (ClassDoesNotExistException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
 				statusData.setText(er.generatemessage(4));
 				statusData.setForeground(Color.RED);
 				error.generateMessage(4);
+				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (StudentNotInClassException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
 				statusData.setText(er.generatemessage(17));
 				statusData.setForeground(Color.RED);
 				error.generateMessage(17);
+				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (StudentIdNotFoundException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
 				statusData.setText(er.generatemessage(9));
 				statusData.setForeground(Color.RED);
 				error.generateMessage(9);
+				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (DuplicateAttendanceEntryException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
 				statusData.setText(er.generatemessage(18));
 				statusData.setForeground(Color.RED);
 				error.generateMessage(18);
+				checkBox.setSelected(false);
+				idNumberInput.setText("");
 			} catch (AgreementNotSelectedException e) {
 				ErrorGUI error = new ErrorGUI();
 				Error er = new Error();
@@ -245,12 +256,10 @@ public class TakeAttendanceGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				
-			}
+			dispose();
 
 		}
 
 	}
 
-
+}

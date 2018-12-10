@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -28,7 +29,7 @@ public class NewPasswordGUI extends JFrame {
 	private JPanel buttonPanel; // button panel
 	private JPanel inputPanel; // JLabel and JTextField panel
 	private JLabel instructionLabel; // instruction label
-	private JTextField input; // input field
+	private JPasswordField input; // input field
 	private JButton execute; // execute button
 	private ButtonListener action; // action listener
 	private String buttonText = "Save Password"; // text for button
@@ -48,7 +49,7 @@ public class NewPasswordGUI extends JFrame {
 		buttonPanel = new JPanel();
 		inputPanel = new JPanel();
 		instructionLabel = new JLabel();
-		input = new JTextField(TEXTFIELDSIZE);
+		input = new JPasswordField(TEXTFIELDSIZE);
 		execute = new JButton();
 		action = new ButtonListener();
 	}
@@ -95,7 +96,7 @@ public class NewPasswordGUI extends JFrame {
 				try {
 					//add password
 					Password pw = new Password();
-					pw.addpassword(input.getText());
+					pw.addpassword(input.getPassword());
 					//close screen
 					dispose();
 				} catch (IOException e) {

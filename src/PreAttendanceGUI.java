@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -49,7 +50,7 @@ public class PreAttendanceGUI extends JFrame {
 	private JComboBox<String> classData; // label for current class info
 	private JLabel dateData; // label for current date info
 	private JLabel timeData; // label for current time info
-	private JTextField passwordInput; // password input
+	private JPasswordField passwordInput; // password input
 	private JButton executeButton; // take attendance button
 	private JButton exitButton; // exit button
 	private String executeButtonText = "Take Attendance Now"; // execute button text
@@ -65,7 +66,7 @@ public class PreAttendanceGUI extends JFrame {
 	private takeAttendanceNowButton takeAttendanceNowButtonActionListener; // action listener for take attendance button
 	private exitButton exitButtonListener; // action listener for exit button
 	private ImageIcon img; // icon image
-	private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png"; // icon file
+	private String iconName = "dmacc_icon.png"; // icon file
 	private final int boxWidth = 20;// combobox width
 	private final int boxHeight = 100; // combo box height
 
@@ -87,7 +88,7 @@ public class PreAttendanceGUI extends JFrame {
 
 		dateData = new JLabel();
 		timeData = new JLabel();
-		passwordInput = new JTextField(passwordInputFieldLength);
+		passwordInput = new JPasswordField(passwordInputFieldLength);
 		executeButton = new JButton();
 		exitButton = new JButton();
 		takeAttendanceNowButtonActionListener = new takeAttendanceNowButton();
@@ -114,30 +115,28 @@ public class PreAttendanceGUI extends JFrame {
 		passwordLabel.setText(passwordLabelText);
 
 		// set up boarders
-
 		dateData.setBorder(BorderFactory.createLineBorder(Color.black));
 		timeData.setBorder(BorderFactory.createLineBorder(Color.black));
-
 		
+		//get current date and time
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.now();
-		
+
+		//set date on screen
 		dateData.setText(date.toString());
 
 		try {
 			AddClass instance = new AddClass();
 			classData = new JComboBox<String>(instance.getclasslist());
 		} catch (IOException e) {
-			
+
 			ErrorGUI error = new ErrorGUI();
 			error.generateMessage(1);
 		}
 
-		DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT)
-	            .withLocale(Locale.US);
-	    		
+		DateTimeFormatter timeFormatter = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT).withLocale(Locale.US);
+		//set time on screen
 		timeData.setText(time.format(timeFormatter));
-		// end test data
 
 		// set up sub panels
 		classPanel.add(classLabel);
@@ -178,12 +177,13 @@ public class PreAttendanceGUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			
+
 			try {
 				Password pw = new Password();
-				if (pw.validatepassword(passwordInput.getText()) == true) {
+				if (pw.validatepassword(passwordInput.getPassword()) == true) {
 					TakeAttendanceGUI instance = new TakeAttendanceGUI();
-					//puts selected class name into take attendance instance to be used in that instance
+					// puts selected class name into take attendance instance to be used in that
+					// instance
 					instance.setTransferClass(classData.getSelectedItem().toString());
 					instance.generateWindow();
 					dispose();

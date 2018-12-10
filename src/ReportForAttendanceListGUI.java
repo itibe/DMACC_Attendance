@@ -14,11 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 
-
-
- 
- 
-
 /**
  * @author Ian Tibe
  *
@@ -72,6 +67,7 @@ public class ReportForAttendanceListGUI extends JFrame {
 			reportArea.setPreferredSize(new Dimension(300, 350));
 			reportArea.setBorder(BorderFactory.createLineBorder(Color.black));
 			reportArea.setAutoscrolls(true);
+			reportArea.setEditable(false);
 			
 			//add data to screen
 			for(int index = 0; index < data.size();index++)

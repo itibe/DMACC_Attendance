@@ -38,7 +38,7 @@ public class AddClassGUI extends JFrame{
 		private addClassButton addClassListener;	//action listener for add class button
 		private exitButton exitButtonListener;		//action listener for exit button
 		private ImageIcon img; //icon image
-		private String iconName = "dmacc_icon.png";
+		private String iconName = "dmacc_icon.png";	//icon file name
 		
 		//constructor
 		/**

@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -37,20 +38,22 @@ public class ImportGUI extends JFrame {
 	private String iconName = "dmacc_icon.png";	//icon file
 	private String instructionText = "Select a class to put students in. \nSelect a file for import. \nFile should be a COMMA DELIMITED format exported from BlackBoard ";
 	private String header = "Import class list";	//window header
-	private JButton chooseFile;
-	private JButton exit;
-	private JButton runImport;
-	private JLabel displayFileImport;
-	private ChooseFileActionListener chooseFileActionListener;
-	private RunImportActionListener runImportActionListener;
-	private ExitButtonActionListener exitButtonActionListener;
+	private JButton chooseFile;	//Button to pick file
+	private JButton exit;	//Button to exit
+	private JButton runImport;	//Button to run import process
+	private JLabel displayFileImport;	//label to display import file
+	private ChooseFileActionListener chooseFileActionListener;	//action listener for chooser
+	private RunImportActionListener runImportActionListener;	//run import action listener
+	private ExitButtonActionListener exitButtonActionListener;	//exit button action listener
+	private String JOPheader = "Import Results";	//results window header
 	
 	
-	private String exitButtonText = "Exit";
-	private String runImportText = "Import File";
-	private String chooseFileText = "Choose File...";
-	private String displayFileImportHeader = " File Selected for Import: ";
-	private String initialdisplayFileImportHeader = " No File selected! ";
+	
+	private String exitButtonText = "Exit";	//exit button text
+	private String runImportText = "Import File";	//import file button text
+	private String chooseFileText = "Choose File...";	//choose file button text
+	private String displayFileImportHeader = " File Selected for Import: ";	
+	private String initialdisplayFileImportHeader = " No File selected! ";	//initial file display note
 		
 	private final int WIDTH = 1000;	//frame width
 	private final int HEIGHT = 200;	//frame height
@@ -164,22 +167,25 @@ public class ImportGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			//get input file name
-			String path=filePicker.getSelectedFile().getAbsolutePath();
-			File input = new File(path);
-			Import instance = new Import();
-			
+						
 			try {
+				//get input file name
+				String path=filePicker.getSelectedFile().getAbsolutePath();
+				File input = new File(path);
+				Import instance = new Import();
+
 				instance.importfile(input, classPicker.getSelectedItem().toString());
+				JOptionPane.showMessageDialog(null, instance.getImported() + " Imported\n" + instance.getNotImported() + " not imported due to dupicated student numbers.\n Addationally, items not imported could be due to wrong input file format", JOPheader, JOptionPane.INFORMATION_MESSAGE);
+				dispose();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(1);
 			} catch (ClassDoesNotExistException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(4);
 			} catch (InvalidDmaccNumberException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				ErrorGUI error = new ErrorGUI();
+				error.generateMessage(15);
 			}
 			
 			

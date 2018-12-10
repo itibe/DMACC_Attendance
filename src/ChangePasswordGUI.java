@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -34,8 +35,8 @@ public class ChangePasswordGUI extends JFrame {
 	private JPanel buttonPanel; // sub panel for buttons
 	private JLabel oldPasswordLabel; // label for old password input
 	private JLabel newPasswordLabel; // label for new password input
-	private JTextField oldPasswordInput; // old password input field
-	private JTextField newPasswordInput; // new password input field
+	private JPasswordField oldPasswordInput; // old password input field
+	private JPasswordField newPasswordInput; // new password input field
 	private JButton changePasswordButton; // change password button
 	private JButton exitButton; // exit button
 	private ImageIcon img; // icon image
@@ -50,7 +51,7 @@ public class ChangePasswordGUI extends JFrame {
 	private final int newPasswordWidth = 25; // width of new password text field
 	private final int WIDTH = 350; // frame width
 	private final int HEIGHT = 250; // frame height
-	private String iconName = "C:\\Users\\Ian Tibe\\DataStructure_FinalProject\\src\\dmacc_icon.png";
+	private String iconName = "dmacc_icon.png";	//icon file name
 
 	/**
 	 * default constructor
@@ -62,8 +63,8 @@ public class ChangePasswordGUI extends JFrame {
 		buttonPanel = new JPanel();
 		oldPasswordLabel = new JLabel();
 		newPasswordLabel = new JLabel();
-		oldPasswordInput = new JTextField(oldPasswordWidth);
-		newPasswordInput = new JTextField(newPasswordWidth);
+		oldPasswordInput = new JPasswordField(oldPasswordWidth);
+		newPasswordInput = new JPasswordField(newPasswordWidth);
 		changePasswordButton = new JButton();
 		exitButton = new JButton();
 		img = new ImageIcon(iconName);
@@ -71,6 +72,9 @@ public class ChangePasswordGUI extends JFrame {
 		exitButtonAction = new exitButtonAction();
 	}
 
+	/**
+	 * generates window
+	 */
 	public void generatewindow() {
 		// set up main panel
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -123,12 +127,12 @@ public class ChangePasswordGUI extends JFrame {
 				if (instance.passwordexist() == false) {
 					throw new MissingPasswordException("Missing old password");
 				}
-				if (instance.validatepassword(oldPasswordInput.getText()) == false) {
+				if (instance.validatepassword(oldPasswordInput.getPassword()) == false) {
 					
 					throw new OldPasswordIncorrectException("Incorrect old password");
 				}
 				// change password
-				instance.changepassword(newPasswordInput.getText());
+				instance.changepassword(newPasswordInput.getPassword());
 				dispose();
 			} catch (IOException e) {
 				ErrorGUI error = new ErrorGUI();

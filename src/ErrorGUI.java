@@ -9,7 +9,7 @@ public class ErrorGUI {
 
 	// Ian Tibe
 	// data fields
-	Error error;
+	private Error error;
 	
 	// constructor
 	/**

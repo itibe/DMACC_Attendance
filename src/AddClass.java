@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author Ian Tibe
  *
  */
+
 public class AddClass {
 	// Ian Tibe
 	// data fields
@@ -38,8 +39,7 @@ public class AddClass {
 			file.createNewFile();
 			nextClassId = 1;
 		}
-		
-		
+
 	}
 
 	// helper method
@@ -50,33 +50,32 @@ public class AddClass {
 	 * @param name
 	 *            name of class
 	 * @throws IOException
-	 * @throws DuplicateClassException 
+	 * @throws DuplicateClassException
 	 */
 	public void addclass(String name) throws IOException, DuplicateClassException {
 
 		// open file
 		FileWriter output = new FileWriter(classFile, true);
-		
-		//check for duplicate class
+
+		// check for duplicate class
 		File file = new File(classFile);
 		Scanner in = new Scanner(file);
-		
-		while(in.hasNextLine())
-		{
+
+		while (in.hasNextLine()) {
 			String line = in.nextLine();
 			Scanner parse = new Scanner(line);
 			parse.useDelimiter(",");
 			String id = parse.next();
 			String nameOfClass = parse.next();
-			if(nameOfClass.equals(name))
-			{
+			if (nameOfClass.equals(name)) {
 				parse.close();
 				in.close();
 				throw new DuplicateClassException("Duplicate class");
 			}
-						
-		}
+			
 		
+		}
+		in.close();
 		
 		// append data and new line
 		output.append(nextClassId + "," + name);
@@ -131,10 +130,12 @@ public class AddClass {
 
 	/**
 	 * returns class id number, given string of class
-	 * @param clas text of class
+	 * 
+	 * @param clas
+	 *            text of class
 	 * @return class id number
 	 * @throws FileNotFoundException
-	 * @throws ClassDoesNotExistException 
+	 * @throws ClassDoesNotExistException
 	 */
 	public int classid(String clas) throws FileNotFoundException, ClassDoesNotExistException {
 		File input = new File(classFile);
@@ -143,18 +144,18 @@ public class AddClass {
 		int classid = 0;
 		String Class = "";
 		int results = 0;
-		//loop through file and get lines
+		// loop through file and get lines
 		while (in.hasNextLine()) {
 			line = in.nextLine();
-			//parse lines and get needed info from lines
+			// parse lines and get needed info from lines
 			Scanner parse = new Scanner(line);
 			parse.useDelimiter(",");
 			classid = parse.nextInt();
 			Class = parse.next();
-			
-			//if input class equals class found in file, we have match
+
+			// if input class equals class found in file, we have match
 			if (clas.equals(Class)) {
-				//set classid number to output in results
+				// set classid number to output in results
 				results = classid;
 			}
 			parse.close();
@@ -167,37 +168,34 @@ public class AddClass {
 		}
 		return results;
 	}
-	
+
 	/**
 	 * returns a string of available class rooms
+	 * 
 	 * @return
 	 * @throws FileNotFoundException
 	 */
-	public String[] getclasslist() throws FileNotFoundException
-	{
+	public String[] getclasslist() throws FileNotFoundException {
 		File file = new File(classFile);
 		Scanner in = new Scanner(file);
 		LinkedList<String> list = new LinkedList<String>();
-		while(in.hasNextLine())
-		{
+		while (in.hasNextLine()) {
 			String line = in.nextLine();
 			Scanner parse = new Scanner(line);
 			parse.useDelimiter(",");
 			String id = parse.next();
 			String nameOfClass = parse.next();
 			list.add(nameOfClass);
-			
-						
+
 		}
-			//get size of linkedlist and create corresponding array.
-			//we need it in form of array for easy input into combo box
+		// get size of linkedlist and create corresponding array.
+		// we need it in form of array for easy input into combo box
 		String[] stringClassList = new String[list.size()];
-			for(int index = 0; index < list.size(); index++)
-			{
-				stringClassList[index] = list.get(index);
-			}
-		
+		for (int index = 0; index < list.size(); index++) {
+			stringClassList[index] = list.get(index);
+		}
+
 		return stringClassList;
 	}
-		
+
 }

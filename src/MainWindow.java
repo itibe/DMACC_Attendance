@@ -80,7 +80,7 @@ public class MainWindow extends JFrame{
 		private aboutMenuItemAction aboutMenuItemAction;	//action listener for about menu 
 		private importMenuItemAction importMenuItemAction;	//action listener for import menu item
 		private ImageIcon img; //icon image
-		private String iconName = "dmacc_icon.png";
+		private String iconName = "dmacc_icon.png";	//icon file name
 		
 		
 		//constructor
@@ -148,6 +148,10 @@ public class MainWindow extends JFrame{
 		
 		//helper
 		
+		/**
+		 * Set display visible or not visible
+		 * @param display
+		 */
 		public void setdisplay(boolean display)
 		{
 			if(display = true)
@@ -195,6 +199,7 @@ public class MainWindow extends JFrame{
 			menu.add(adminMenu);
 			menu.add(aboutMenu);
 			
+			//add items to menu
 			fileMenu.add(exitMenuItem);
 			functionsMenu.add(addClassMenuItem);
 			functionsMenu.add(addStudentMenuItem);
@@ -203,10 +208,7 @@ public class MainWindow extends JFrame{
 			functionsMenu.add(reportMenuItem);
 			adminMenu.add(changeAdminPasswordMenuItem);
 			aboutMenu.add(aboutMenuItem);
-			
-			
-			
-			
+						
 			//set up statusboard
 			statusBoard.setBorder(BorderFactory.createLineBorder(Color.black));
 			statusBoard.setText("Status: Welcome to DMACC Attendance");
@@ -366,10 +368,9 @@ public class MainWindow extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-					ChooseReportGUI instance = new ChooseReportGUI();
-					instance.generatewindow();
-								
+				SimplePasswordGUI instance = new SimplePasswordGUI();
+				instance.generatewindow();
+													
 			}
 			
 		}

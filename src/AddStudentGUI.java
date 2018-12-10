@@ -57,7 +57,7 @@ public class AddStudentGUI extends JFrame {
 	private addStudentButton addStudentLisener; // action listener for add student button
 	private exitButton exitButtonListener; // action listener for exit button
 	private ImageIcon img; // icon image
-	private String iconName = "dmacc_icon.png";
+	private String iconName = "dmacc_icon.png";	//icon file name
 
 	// constructor
 	/**
